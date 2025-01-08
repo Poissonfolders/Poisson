@@ -11,27 +11,30 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-  
+
 .container {
     position: relative;
     width: 100vw;
     height: 100vh;
 }
 
-/* Croix cliquable */
+/* Croix cliquable - Position fixe en haut à droite */
 .cross {
     position: fixed;
     top: 20px;
-    left: 20px;
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.5);
+    right: 20px;
+    font-size: 36px;
+    color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     z-index: 1000;
     transition: color 0.3s ease;
+    font-weight: bold;
+    padding: 10px;
 }
 
 .cross:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
 }
 
 /* Terminal pour le dialogue avec Kamilla */
@@ -71,11 +74,16 @@ body {
     font-size: 16px;
     width: 100%;
     outline: none;
+    margin-top: 20px;
 }
 
-#kamillaDialog {
+#kallimaDialog {
     margin-top: 20px;
     line-height: 1.5;
+}
+
+#refreshBtn, #alternateRefreshBtn {
+    margin-bottom: 20px;
 }
 
 /* Les 4 vidéos */
@@ -85,7 +93,7 @@ video {
     object-fit: cover;
     display: block;
 }
-  
+
 /* Boîte "terminal" */
 #terminal {
     position: absolute;
@@ -96,14 +104,14 @@ video {
     border: 2px solid white;
     padding: 10px 15px;
     font-size: 16px;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     gap: 10px;
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 2;
 }
-  
+
 /* Boîte finale */
 #finalDialog {
     position: absolute;
@@ -139,7 +147,7 @@ p {
 }
 
 #choices p {
-    margin: 10px 0; 
+    margin: 10px 0;
     line-height: 1.5;
     opacity: 0;
     transform: translateY(10px);
