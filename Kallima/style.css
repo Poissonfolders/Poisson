@@ -18,22 +18,22 @@ body {
     height: 100vh;
 }
 
-/* Croix cliquable - Position fixe en haut à droite */
+/* Croix cliquable - Position fixe en haut à droite modifiée pour être plus discrète */
 .cross {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 36px;
-    color: rgba(255, 255, 255, 0.8);
+    top: 15px;
+    right: 15px;
+    font-size: 24px;  /* Taille réduite de 36px à 24px */
+    color: rgba(255, 255, 255, 0.4);  /* Opacité réduite de 0.8 à 0.4 */
     cursor: pointer;
     z-index: 1000;
     transition: color 0.3s ease;
-    font-weight: bold;
-    padding: 10px;
+    font-weight: normal;  /* Changé de bold à normal */
+    padding: 5px;  /* Padding réduit de 10px à 5px */
 }
 
 .cross:hover {
-    color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 0.8);  /* Opacité au hover réduite aussi */
     transform: scale(1.1);
 }
 
