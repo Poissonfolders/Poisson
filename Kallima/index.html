@@ -7,8 +7,8 @@
 </head>
 <body>
 <div class="container">
-<!-- Croix déplacée au niveau supérieur de la container -->
-<div class="cross">×</div>
+<!-- Croix avec nouvelle classe pour l'animation -->
+<div class="cross fade-in hidden">×</div>
 
 <!-- Terminal caché pour le dialogue avec Kamilla -->
 <div id="terminalDialog" class="hidden">
@@ -45,8 +45,10 @@ Your browser does not support the video tag.
 
 <!-- Boîte de dialogue initial ("terminal") -->
 <div id="terminal" class="hidden">
+<p id="dynamicText"></p>
 <p id="peacefulIntro" class="hidden">
-But here, where everything is peaceful and at your reach, <strong>4</strong> actions are available to you. It is reassuring.
+But here, where everything is peaceful and at your reach,
+<strong>4</strong> actions are available to you. It is reassuring.
 </p>
 <div id="choices" class="hidden">
 <p>> [1] I know I'm being heard, if I ask for this fire to stop, it will vanish.</p>

@@ -50,7 +50,7 @@ cross.addEventListener('click', () => {
     document.querySelectorAll('video, #terminal, #finalDialog').forEach(el => {
         el.style.display = 'none';
     });
-    
+
     terminalDialog.classList.remove('hidden');
     typeCodeLines(0);
 });
@@ -175,7 +175,15 @@ const texts = [
     }
 ];
 
-setTimeout(showTerminal, 5000);
+setTimeout(() => {
+    showTerminal();
+    // Afficher la croix en même temps
+    cross.classList.remove("hidden");
+    // Petit délai pour l'animation de fondu
+    setTimeout(() => {
+        cross.classList.add("fade-in");
+    }, 100);
+}, 5000);
 
 function showTerminal() {
     terminal.classList.remove("hidden");
