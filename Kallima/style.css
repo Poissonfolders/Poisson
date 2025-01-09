@@ -153,8 +153,7 @@ video {
 /* Boîte "terminal" */
 #terminal {
     position: absolute;
-    bottom: 50%;
-    transform: translateY(50%);
+    bottom: 10%;
     left: 20%;
     right: 20%;
     background: rgba(0, 0, 0, 0.6);
@@ -167,28 +166,6 @@ video {
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 2;
-}
-
-/* Style spécifique pour la section des choix */
-#choices {
-    max-height: 150px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #00ff00 rgba(0, 0, 0, 0.2);
-}
-
-/* Style de la scrollbar pour Chrome */
-#choices::-webkit-scrollbar {
-    width: 6px;
-}
-
-#choices::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#choices::-webkit-scrollbar-thumb {
-    background-color: #00ff00;
-    border-radius: 3px;
 }
 
 /* Boîte finale */
@@ -223,6 +200,11 @@ p {
     margin: 10px 0 5px 0;
     opacity: 0;
     transition: opacity 0.5s ease;
+}
+
+#choices {
+    display: flex;
+    flex-direction: column;
 }
 
 #choices p {
@@ -265,10 +247,28 @@ p {
         right: 10%;
         font-size: 14px;
         background: rgba(0, 0, 0, 0.9);
+        max-height: 40vh; /* Limite la hauteur sur mobile */
+        overflow-y: auto; /* Permet le scroll vertical */
     }
 
-    #choices {
-        max-height: 120px; /* Hauteur légèrement réduite sur mobile */
+    /* Style de la scrollbar pour le terminal sur mobile */
+    #terminal::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    #terminal::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    #terminal::-webkit-scrollbar-thumb {
+        background-color: #00ff00;
+        border-radius: 3px;
+    }
+
+    /* Pour Firefox */
+    #terminal {
+        scrollbar-width: thin;
+        scrollbar-color: #00ff00 rgba(0, 0, 0, 0.2);
     }
 
     #finalDialog {
