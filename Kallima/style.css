@@ -145,7 +145,7 @@ video {
     position: fixed;
     left: 0;
     /* Décaler la vidéo vers le haut pour cacher le ciel */
-    top: -20%;
+    top: -10%;
     /* Augmenter la taille pour compenser le décalage */
     height: 110%;
 }
@@ -153,7 +153,8 @@ video {
 /* Boîte "terminal" */
 #terminal {
     position: absolute;
-    bottom: 10%;
+    bottom: 50%;
+    transform: translateY(50%);
     left: 20%;
     right: 20%;
     background: rgba(0, 0, 0, 0.6);
@@ -166,6 +167,28 @@ video {
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 2;
+}
+
+/* Style spécifique pour la section des choix */
+#choices {
+    max-height: 150px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #00ff00 rgba(0, 0, 0, 0.2);
+}
+
+/* Style de la scrollbar pour Chrome */
+#choices::-webkit-scrollbar {
+    width: 6px;
+}
+
+#choices::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#choices::-webkit-scrollbar-thumb {
+    background-color: #00ff00;
+    border-radius: 3px;
 }
 
 /* Boîte finale */
@@ -237,39 +260,21 @@ p {
 
 /* Media Queries pour mobile */
 @media screen and (max-width: 768px) {
-    /* Modification du terminal pour le rendre scrollable */
     #terminal {
-        max-height: 30vh;
-        overflow-y: auto;
-        /* Styles pour une jolie scrollbar */
-        scrollbar-width: thin;
-        scrollbar-color: #00ff00 rgba(0, 0, 0, 0.2);
-        left: 5%;
-        right: 5%;
+        left: 10%;
+        right: 10%;
         font-size: 14px;
-        bottom: 10%;
         background: rgba(0, 0, 0, 0.9);
     }
 
-    /* Style de la scrollbar pour Chrome */
-    #terminal::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    #terminal::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.2);
-    }
-
-    #terminal::-webkit-scrollbar-thumb {
-        background-color: #00ff00;
-        border-radius: 3px;
+    #choices {
+        max-height: 120px; /* Hauteur légèrement réduite sur mobile */
     }
 
     #finalDialog {
-        left: 5%;
-        right: 5%;
+        left: 10%;
+        right: 10%;
         font-size: 14px;
-        bottom: 10%;
         background: rgba(0, 0, 0, 0.9);
     }
 
