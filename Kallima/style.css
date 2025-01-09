@@ -10,32 +10,40 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
-}
-
-.container {
+    }
+    
+    .container {
     position: relative;
     width: 100vw;
     height: 100vh;
-}
-
-/* Croix cliquable */
-.cross {
+    }
+    
+    /* Croix cliquable - Position et taille ajustées */
+    .cross {
     position: fixed;
     top: 20px;
-    left: 20px;
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.5);
+    right: 30px;
+    font-size: 33px;
+    color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
     z-index: 1000;
-    transition: color 0.3s ease;
-}
-
-.cross:hover {
+    transition: color 0.3s ease, opacity 0.5s ease;
+    font-weight: normal;
+    padding: 5px;
+    opacity: 0;
+    }
+    
+    .cross.fade-in {
+    opacity: 1;
+    }
+    
+    .cross:hover {
     color: rgba(255, 255, 255, 0.8);
-}
-
-/* Terminal pour le dialogue avec Kamilla */
-#terminalDialog {
+    transform: scale(1.1);
+    }
+    
+    /* Terminal pour le dialogue avec Kamilla */
+    #terminalDialog {
     position: fixed;
     top: 0;
     left: 0;
@@ -47,23 +55,23 @@ body {
     font-family: 'Courier New', monospace;
     z-index: 1001;
     overflow-y: auto;
-}
-
-#codeLines {
+    }
+    
+    #codeLines {
     margin-bottom: 20px;
-}
-
-#cursor {
+    }
+    
+    #cursor {
     display: inline-block;
     animation: blink 1s infinite;
-}
-
-@keyframes blink {
+    }
+    
+    @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
-}
-
-#userInput {
+    }
+    
+    #userInput {
     background: none;
     border: none;
     color: #00ff00;
@@ -72,33 +80,27 @@ body {
     width: 100%;
     outline: none;
     margin-top: 20px;
-}
-
-#kallimaDialog {
+    }
+    
+    #kallimaDialog {
     margin-top: 20px;
     line-height: 1.5;
-}
-
-#refreshBtn, #alternateRefreshBtn {
+    }
+    
+    #refreshBtn, #alternateRefreshBtn {
     margin-bottom: 20px;
-}
-
-/* Les 4 vidéos */
-video {
+    }
+    
+    /* Les 4 vidéos */
+    video {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
     display: block;
-    position: fixed;
-    left: 0;
-    /* Décaler la vidéo vers le haut pour cacher le ciel */
-    top: -10%;
-    /* Augmenter la taille pour compenser le décalage */
-    height: 110%;
-}
-
-/* Boîte "terminal" */
-#terminal {
+    }
+    
+    /* Boîte "terminal" */
+    #terminal {
     position: absolute;
     bottom: 10%;
     left: 20%;
@@ -113,10 +115,10 @@ video {
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 2;
-}
-
-/* Boîte finale */
-#finalDialog {
+    }
+    
+    /* Boîte finale */
+    #finalDialog {
     position: absolute;
     bottom: 10%;
     left: 20%;
@@ -131,42 +133,42 @@ video {
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 2;
-}
-
-.hidden {
+    }
+    
+    .hidden {
     display: none !important;
-}
-
-p {
+    }
+    
+    p {
     margin: 0;
     padding: 0;
-}
-
-#peacefulIntro {
+    }
+    
+    #peacefulIntro {
     font-size: 16px;
     margin: 10px 0 5px 0;
     opacity: 0;
     transition: opacity 0.5s ease;
-}
-
-#choices p {
+    }
+    
+    #choices p {
     margin: 10px 0;
     line-height: 1.5;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.5s ease, transform 0.5s ease;
     cursor: pointer;
-}
-
-#choices p:hover {
+    }
+    
+    #choices p:hover {
     text-decoration: underline;
-}
-
-#refreshBtn.hidden, #alternateRefreshBtn.hidden {
+    }
+    
+    #refreshBtn.hidden, #alternateRefreshBtn.hidden {
     display: none;
-}
-
-#refreshBtn, #alternateRefreshBtn {
+    }
+    
+    #refreshBtn, #alternateRefreshBtn {
     background: none;
     color: #00ff00;
     border: 1px solid #00ff00;
@@ -175,62 +177,9 @@ p {
     cursor: pointer;
     align-self: flex-start;
     margin-top: 10px;
-}
-
-#refreshBtn:hover, #alternateRefreshBtn:hover {
+    }
+    
+    #refreshBtn:hover, #alternateRefreshBtn:hover {
     background: #00ff00;
     color: black;
-}
-
-/* Media Queries pour mobile */
-@media screen and (max-width: 768px) {
-    /* On modifie uniquement #choices pour permettre le scroll */
-    #choices {
-        max-height: 150px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #00ff00 rgba(0, 0, 0, 0.2);
     }
-
-    /* Style de la scrollbar pour Chrome */
-    #choices::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    #choices::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.2);
-    }
-
-    #choices::-webkit-scrollbar-thumb {
-        background-color: #00ff00;
-        border-radius: 3px;
-    }
-
-    /* Ajustements mineurs pour mobile */
-    .cross {
-        font-size: 28px;
-        top: env(safe-area-inset-top, 15px);
-        right: 15px;
-    }
-
-    #terminal {
-        background: rgba(0, 0, 0, 0.9);
-    }
-}
-
-/* Gestion de l'orientation */
-@media screen and (max-width: 768px) and (orientation: portrait) {
-    .container > *:not(#orientationMessage) {
-        display: none !important;
-    }
-
-    .orientation-message {
-        display: flex;
-    }
-}
-
-@media screen and (max-width: 768px) and (orientation: landscape) {
-    .orientation-message {
-        display: none;
-    }
-}
