@@ -1,4 +1,38 @@
-// script.js
+// Détection mobile et gestion de l'orientation
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function handleOrientation() {
+    const orientationMessage = document.getElementById('orientationMessage');
+    
+    if (isMobile()) {
+        if (window.innerHeight > window.innerWidth) {
+            // Portrait mode
+            orientationMessage.classList.remove('hidden');
+            document.querySelectorAll('.container > *:not(#orientationMessage)').forEach(el => {
+                if (!el.classList.contains('hidden')) {
+                    el.dataset.wasVisible = 'true';
+                    el.classList.add('hidden');
+                }
+            });
+        } else {
+            // Landscape mode
+            orientationMessage.classList.add('hidden');
+            document.querySelectorAll('[data-was-visible="true"]').forEach(el => {
+                el.classList.remove('hidden');
+                el.removeAttribute('data-was-visible');
+            });
+        }
+    }
+}
+
+// Écouteurs d'événements pour l'orientation
+window.addEventListener('load', handleOrientation);
+window.addEventListener('resize', handleOrientation);
+window.addEventListener('orientationchange', handleOrientation);
+
+// Le reste du code existant
 const videoStart = document.getElementById('videoStart');
 const videoLoop = document.getElementById('videoLoop');
 const videoChoice = document.getElementById('videoChoice');
