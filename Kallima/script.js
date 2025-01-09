@@ -32,11 +32,28 @@ window.addEventListener('load', handleOrientation);
 window.addEventListener('resize', handleOrientation);
 window.addEventListener('orientationchange', handleOrientation);
 
+// Désactiver le défilement sur mobile
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+}, { passive: false });
+
 // Le reste du code existant
 const videoStart = document.getElementById('videoStart');
 const videoLoop = document.getElementById('videoLoop');
 const videoChoice = document.getElementById('videoChoice');
 const videoPixel = document.getElementById('videoPixel');
+
+// Forcer le plein écran sur iOS
+function enableIOSFullscreen() {
+    if (isMobile()) {
+        [videoStart, videoLoop, videoChoice, videoPixel].forEach(video => {
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
+        });
+    }
+}
+
+enableIOSFullscreen();
 
 // 1) À la fin de Start.mp4, on affiche Fire.mp4 (loop)
 videoStart.addEventListener('ended', () => {
@@ -84,7 +101,7 @@ cross.addEventListener('click', () => {
     document.querySelectorAll('video, #terminal, #finalDialog').forEach(el => {
         el.style.display = 'none';
     });
-
+    
     terminalDialog.classList.remove('hidden');
     typeCodeLines(0);
 });
@@ -94,10 +111,10 @@ function typeCodeLines(index) {
         blinkCursor();
         return;
     }
-
+    
     const line = fakeCodes[index];
     let charIndex = 0;
-
+    
     function typeLine() {
         if (charIndex < line.length) {
             codeLines.innerHTML += line[charIndex];
@@ -108,14 +125,14 @@ function typeCodeLines(index) {
             setTimeout(() => typeCodeLines(index + 1), 200);
         }
     }
-
+    
     typeLine();
 }
 
 function blinkCursor() {
     cursor.classList.remove('hidden');
     let blinkCount = 0;
-
+    
     const blinkInterval = setInterval(() => {
         blinkCount++;
         if (blinkCount >= 6) {
@@ -137,7 +154,7 @@ function typeKallimaText(text, callback) {
     isKallimaSpeaking = true;
     let charIndex = 0;
     kallimaDialog.textContent = '';
-
+    
     function type() {
         if (charIndex < text.length) {
             kallimaDialog.textContent += text[charIndex];
@@ -150,7 +167,7 @@ function typeKallimaText(text, callback) {
             }
         }
     }
-
+    
     type();
 }
 
@@ -159,13 +176,13 @@ userInput.addEventListener('keypress', (e) => {
         const userMessage = userInput.value.trim();
         userInput.value = '';
         userInput.disabled = true;
-
+        
         const response = kallimaResponses[dialogIndex];
-
+        
         typeKallimaText(response, () => {
             dialogIndex++;
             userInput.disabled = false;
-
+            
             if (dialogIndex === 1 || dialogIndex === 3) {
                 kallimaDialog.innerHTML += '<br><br>';
                 const refreshButton = document.getElementById('refreshBtn').cloneNode(true);
@@ -173,7 +190,7 @@ userInput.addEventListener('keypress', (e) => {
                 kallimaDialog.appendChild(refreshButton);
                 refreshButton.addEventListener('click', () => window.location.reload());
             }
-
+            
             if (dialogIndex < kallimaResponses.length) {
                 userInput.focus();
             }
@@ -187,14 +204,11 @@ userInput.addEventListener('keypress', (e) => {
     }
 });
 
+// Gestion du terminal principal
 const terminal = document.getElementById('terminal');
 const peacefulIntro = document.getElementById('peacefulIntro');
 const choices = document.getElementById('choices');
-
-const dynamicText = document.createElement('p');
-dynamicText.id = "dynamicText";
-dynamicText.textContent = "";
-terminal.insertBefore(dynamicText, peacefulIntro);
+const dynamicText = document.getElementById('dynamicText');
 
 const texts = [
     {
@@ -230,12 +244,12 @@ function typeText(index) {
         showPeacefulIntro();
         return;
     }
-
+    
     const { content, speed, erase } = texts[index];
     let charIndex = 0;
-
+    
     dynamicText.textContent = "";
-
+    
     function type() {
         if (charIndex < content.length) {
             dynamicText.textContent = content.substring(0, charIndex + 1);
@@ -247,13 +261,13 @@ function typeText(index) {
             setTimeout(() => typeText(index + 1), 500);
         }
     }
-
+    
     type();
 }
 
 function eraseText(content, index) {
     let charIndex = content.length;
-
+    
     function erase() {
         if (charIndex > 0) {
             dynamicText.textContent = content.substring(0, charIndex - 1);
@@ -264,7 +278,7 @@ function eraseText(content, index) {
             typeText(index + 1);
         }
     }
-
+    
     erase();
 }
 
@@ -317,10 +331,10 @@ function typeFinalTexts(index) {
     }
     const { content, speed } = finalTexts[index];
     let charIndex = 0;
-
+    
     const targetParagraph = (index === 0) ? finalText1 : finalText2;
     targetParagraph.textContent = "";
-
+    
     function type() {
         if (charIndex < content.length) {
             targetParagraph.textContent += content[charIndex];
@@ -336,4 +350,3 @@ function typeFinalTexts(index) {
 refreshBtn.addEventListener('click', () => {
     window.location.reload();
 });
-
