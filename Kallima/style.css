@@ -145,7 +145,7 @@ video {
     position: fixed;
     left: 0;
     /* Décaler la vidéo vers le haut pour cacher le ciel */
-    top: -10%;
+    top: -20%;
     /* Augmenter la taille pour compenser le décalage */
     height: 110%;
 }
