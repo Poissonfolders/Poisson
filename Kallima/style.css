@@ -9,17 +9,61 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    height: -webkit-fill-available; /* Pour iOS */
     overflow: hidden;
-    }
-    
-    .container {
+    position: fixed; /* Empêche le défilement sur mobile */
+    width: 100%;
+}
+
+.container {
     position: relative;
     width: 100vw;
     height: 100vh;
+    height: -webkit-fill-available; /* Pour iOS */
+    overflow: hidden;
+}
+
+/* Message d'orientation pour mobile */
+.orientation-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: -webkit-fill-available;
+    background-color: black;
+    color: #00ff00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 20px;
+}
+
+.orientation-message p {
+    max-width: 80%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards, fadeOut 0.5s 4.5s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
-    
-    /* Croix cliquable - Position et taille ajustées */
-    .cross {
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+/* Croix cliquable */
+.cross {
     position: fixed;
     top: 20px;
     right: 30px;
@@ -31,19 +75,19 @@ body {
     font-weight: normal;
     padding: 5px;
     opacity: 0;
-    }
-    
-    .cross.fade-in {
+}
+
+.cross.fade-in {
     opacity: 1;
-    }
-    
-    .cross:hover {
+}
+
+.cross:hover {
     color: rgba(255, 255, 255, 0.8);
     transform: scale(1.1);
-    }
-    
-    /* Terminal pour le dialogue avec Kamilla */
-    #terminalDialog {
+}
+
+/* Terminal pour le dialogue avec Kamilla */
+#terminalDialog {
     position: fixed;
     top: 0;
     left: 0;
@@ -55,23 +99,23 @@ body {
     font-family: 'Courier New', monospace;
     z-index: 1001;
     overflow-y: auto;
-    }
-    
-    #codeLines {
+}
+
+#codeLines {
     margin-bottom: 20px;
-    }
-    
-    #cursor {
+}
+
+#cursor {
     display: inline-block;
     animation: blink 1s infinite;
-    }
-    
-    @keyframes blink {
+}
+
+@keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
-    }
-    
-    #userInput {
+}
+
+#userInput {
     background: none;
     border: none;
     color: #00ff00;
@@ -80,27 +124,31 @@ body {
     width: 100%;
     outline: none;
     margin-top: 20px;
-    }
-    
-    #kallimaDialog {
+}
+
+#kallimaDialog {
     margin-top: 20px;
     line-height: 1.5;
-    }
-    
-    #refreshBtn, #alternateRefreshBtn {
+}
+
+#refreshBtn, #alternateRefreshBtn {
     margin-bottom: 20px;
-    }
-    
-    /* Les 4 vidéos */
-    video {
+}
+
+/* Les 4 vidéos */
+video {
     width: 100vw;
     height: 100vh;
+    height: -webkit-fill-available;
     object-fit: cover;
     display: block;
-    }
-    
-    /* Boîte "terminal" */
-    #terminal {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Boîte "terminal" */
+#terminal {
     position: absolute;
     bottom: 10%;
     left: 20%;
@@ -115,10 +163,10 @@ body {
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 2;
-    }
-    
-    /* Boîte finale */
-    #finalDialog {
+}
+
+/* Boîte finale */
+#finalDialog {
     position: absolute;
     bottom: 10%;
     left: 20%;
@@ -133,42 +181,42 @@ body {
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 2;
-    }
-    
-    .hidden {
+}
+
+.hidden {
     display: none !important;
-    }
-    
-    p {
+}
+
+p {
     margin: 0;
     padding: 0;
-    }
-    
-    #peacefulIntro {
+}
+
+#peacefulIntro {
     font-size: 16px;
     margin: 10px 0 5px 0;
     opacity: 0;
     transition: opacity 0.5s ease;
-    }
-    
-    #choices p {
+}
+
+#choices p {
     margin: 10px 0;
     line-height: 1.5;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.5s ease, transform 0.5s ease;
     cursor: pointer;
-    }
-    
-    #choices p:hover {
+}
+
+#choices p:hover {
     text-decoration: underline;
-    }
-    
-    #refreshBtn.hidden, #alternateRefreshBtn.hidden {
+}
+
+#refreshBtn.hidden, #alternateRefreshBtn.hidden {
     display: none;
-    }
-    
-    #refreshBtn, #alternateRefreshBtn {
+}
+
+#refreshBtn, #alternateRefreshBtn {
     background: none;
     color: #00ff00;
     border: 1px solid #00ff00;
@@ -177,9 +225,46 @@ body {
     cursor: pointer;
     align-self: flex-start;
     margin-top: 10px;
-    }
-    
-    #refreshBtn:hover, #alternateRefreshBtn:hover {
+}
+
+#refreshBtn:hover, #alternateRefreshBtn:hover {
     background: #00ff00;
     color: black;
+}
+
+/* Media Queries pour mobile */
+@media screen and (max-width: 768px) {
+    #terminal, #finalDialog {
+        left: 10%;
+        right: 10%;
+        font-size: 14px;
+        bottom: 15%;
     }
+
+    .cross {
+        font-size: 28px;
+        top: env(safe-area-inset-top, 15px);
+        right: 20px;
+    }
+
+    #choices p {
+        margin: 8px 0;
+    }
+}
+
+/* Gestion de l'orientation */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    .container > *:not(#orientationMessage) {
+        display: none !important;
+    }
+
+    .orientation-message {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .orientation-message {
+        display: none;
+    }
+}
