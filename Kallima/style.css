@@ -9,57 +9,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    height: -webkit-fill-available; /* Pour iOS */
     overflow: hidden;
-    position: fixed; /* Empêche le défilement sur mobile */
-    width: 100%;
 }
 
 .container {
     position: relative;
     width: 100vw;
     height: 100vh;
-    height: -webkit-fill-available; /* Pour iOS */
-    overflow: hidden;
-}
-
-/* Message d'orientation pour mobile */
-.orientation-message {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    height: -webkit-fill-available;
-    background-color: black;
-    color: #00ff00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 20px;
-}
-
-.orientation-message p {
-    max-width: 80%;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.5s forwards, fadeOut 0.5s 4.5s forwards;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeOut {
-    to {
-        opacity: 0;
-    }
 }
 
 /* Croix cliquable */
@@ -70,7 +26,7 @@ body {
     font-size: 33px;
     color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
-    z-index: 2000;
+    z-index: 1000;
     transition: color 0.3s ease, opacity 0.5s ease;
     font-weight: normal;
     padding: 5px;
@@ -139,7 +95,6 @@ body {
 video {
     width: 100vw;
     height: 100vh;
-    height: -webkit-fill-available;
     object-fit: cover;
     display: block;
     position: fixed;
